@@ -1,10 +1,7 @@
-const axios = require('axios');
-
-// Configuration and Constants
 const REFERER_YOUTUBE = 'https://www.youtube.com/';
 const USER_AGENT_ANDROID = 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Mobile Safari/537.36';
 
-class ScoDerInnerTube {
+class InnerTube {
   constructor(options = {}) {
     // Default to Android client
     this.baseUrl = 'https://youtubei.googleapis.com/youtubei/v1/';
@@ -17,11 +14,6 @@ class ScoDerInnerTube {
       referer: REFERER_YOUTUBE,
       ...options
     };
-
-    this.session = axios.create({
-      baseURL: this.baseUrl,
-      headers: this.getHeaders()
-    });
   }
 
   getHeaders() {
@@ -48,21 +40,27 @@ class ScoDerInnerTube {
 
   async makeRequest(endpoint, payload) {
     try {
-      const response = await this.session.post(endpoint, payload, {
-        params: { key: this.context.apiKey }
+      const url = new URL(endpoint, this.baseUrl);
+      url.searchParams.set('key', this.context.apiKey);
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: this.getHeaders(),
+        body: JSON.stringify(payload)
       });
 
-      return response.data;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
     } catch (error) {
       throw this.handleError(error);
     }
   }
 
   handleError(error) {
-    if (axios.isAxiosError(error)) {
-      return new Error(`YouTube API Error: ${error.response?.data?.error?.message || error.message}`);
-    }
-    return error;
+    return new Error(`YouTube API Error: ${error.message}`);
   }
 
   async config() {
@@ -141,11 +139,9 @@ class ScoDerInnerTube {
   }
 }
 
-module.exports = ScoDerInnerTube;
-
 // Example usage
 async function example() {
-  const yt = new ScoDerInnerTube();
+  const yt = new InnerTube();
   try {
     // Player example
     const playerInfo = await yt.player({ videoId: 'dQw4w9WgXcQ' });
@@ -162,3 +158,5 @@ async function example() {
     console.error(error);
   }
 }
+
+module.exports = InnerTube;

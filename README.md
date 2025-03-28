@@ -1,20 +1,20 @@
-# SoCoder InnerTube
+# InnerTube
 
 A lightweight library to interact with YouTube API using InnerTube.
 
 ## Installation
 
 ```bash
-npm install socoder-innertube
+npm install innertube
 ```
 
 ## Usage
 
 ```javascript
-const ScoDerInnerTube = require('socoder-innertube');
+const InnerTube = require('innertube');
 
 async function example() {
-  const yt = new ScoDerInnerTube();
+  const yt = new InnerTube();
 
   try {
     // Get video player information

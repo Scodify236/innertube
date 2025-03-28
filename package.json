@@ -1,5 +1,5 @@
 {
-  "name": "socoder-innertube",
+  "name": "innertube",
   "version": "1.0.0",
   "description": "A lightweight library to interact with YouTube API using InnerTube.",
   "main": "src/index.js",
@@ -8,16 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/socoder-innertube"
+    "url": "git+https://github.com/Scodify236/innertube.git"
   },
   "keywords": [
     "youtube",
     "api",
     "innertube"
   ],
-  "author": "Your Name",
+  "author": "Shashwat",
   "license": "MIT",
-  "dependencies": {
-    "axios": "^1.8.4"
-  }
+  "homepage": "scoderportfolio.netlify.app"
 }

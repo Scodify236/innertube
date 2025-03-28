@@ -1,0 +1,23 @@
+{
+  "name": "socoder-innertube",
+  "version": "1.0.0",
+  "description": "A lightweight library to interact with YouTube API using InnerTube.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/socoder-innertube"
+  },
+  "keywords": [
+    "youtube",
+    "api",
+    "innertube"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.8.4"
+  }
+}
